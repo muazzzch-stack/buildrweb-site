@@ -14,5 +14,3 @@ User-agent: *
 Allow: /
 
 Sitemap: https://buildrweb.com/sitemap.xml
-
-Agentmap: https://buildrweb.com/.well-known/ard.json
