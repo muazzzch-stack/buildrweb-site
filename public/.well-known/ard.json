@@ -1,0 +1,48 @@
+{
+  "entries": [
+    {
+      "identifier": "urn:air:buildrweb.com:site:business-profile",
+      "displayName": "BuildrWeb business profile and services",
+      "type": "application/ld+json",
+      "description": "Schema.org description of BuildrWeb, a remote-first studio that builds websites, AI voice agents and business automations for UK tradespeople and local service businesses.",
+      "tags": ["web design", "ai voice agents", "automation", "local seo", "uk"],
+      "representativeQueries": [
+        "web design agency for UK tradespeople",
+        "AI receptionist that answers calls for a plumbing business",
+        "automate booking confirmations and reminders for a dental practice"
+      ],
+      "data": {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "BuildrWeb",
+        "url": "https://buildrweb.com/",
+        "email": "hello@buildrweb.com",
+        "areaServed": { "@type": "Country", "name": "United Kingdom" },
+        "description": "Remote-first websites, AI voice agents and business automations for UK tradespeople and local service businesses.",
+        "knowsAbout": ["WordPress websites", "AI voice agents", "Business automation", "Local SEO"],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Services",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "WordPress Websites" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI-Powered Website Development" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Voice Agents" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Business Automations" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Local SEO and Speed" } }
+          ]
+        }
+      }
+    },
+    {
+      "identifier": "urn:air:buildrweb.com:site:sitemap",
+      "displayName": "BuildrWeb sitemap",
+      "type": "application/xml",
+      "description": "XML sitemap listing the public pages of buildrweb.com.",
+      "url": "https://buildrweb.com/sitemap.xml",
+      "representativeQueries": [
+        "list the pages on buildrweb.com",
+        "find the BuildrWeb privacy policy page"
+      ]
+    }
+  ]
+}

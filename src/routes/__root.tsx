@@ -52,6 +52,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preload", as: "font", type: "font/woff2", href: fontDisplay, crossOrigin: "anonymous" },
       { rel: "preload", as: "font", type: "font/woff2", href: fontSans, crossOrigin: "anonymous" },
       { rel: "stylesheet", href: appCss },
+      { rel: "ard", href: "/.well-known/ard.json", type: "application/json" },
+      { rel: "alternate", type: "text/markdown", href: "/llms.txt", title: "LLM-readable site summary" },
       { rel: "icon", href: "/favicon.ico", sizes: "any" },
       { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32.png" },
       { rel: "icon", type: "image/png", sizes: "192x192", href: "/favicon.png" },

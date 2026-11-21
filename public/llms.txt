@@ -1,15 +1,27 @@
 # BuildrWeb
 
-> Remote-first studio building websites, AI voice agents and business automations for UK tradespeople and local service businesses (plumbers, electricians, roofers, builders, dentists, restaurants, estate agents).
+> Remote-first studio building fast websites, AI voice agents and business automations for UK tradespeople and local service businesses, including plumbers, electricians, roofers, builders, dentists, restaurants and estate agents.
+
+BuildrWeb builds WordPress websites, AI receptionists that answer calls, and automations that confirm bookings, send reminders and follow up on enquiries. Sample websites and automation demos on the site are fictional concepts, not client work.
 
 ## Services
-- WordPress Websites
-- AI-Powered Website Development
-- AI Voice Agents (24/7 call answering, booking, lead qualification)
-- Business Automations (confirmations, reminders, lead routing, CRM updates)
-- Local SEO and Speed
 
-## Links
-- Home: https://buildrweb.com/
-- Privacy: https://buildrweb.com/privacy
-- Contact: hello@buildrweb.com
+- [Websites and local SEO](https://buildrweb.com/#services): WordPress websites, AI-assisted custom builds, local SEO foundations and fast page speed.
+- [AI voice agents](https://buildrweb.com/#services): AI receptionists that answer calls around the clock, take bookings and capture lead details.
+- [Business automations](https://buildrweb.com/#automations): example workflows for booking confirmations, reminders, lead scoring and alerts.
+
+## Work and process
+
+- [Sample websites](https://buildrweb.com/#work): concept websites for different trades.
+- [Why BuildrWeb](https://buildrweb.com/#why): what makes the approach different.
+- [How a project runs](https://buildrweb.com/#process): discovery, system design, build and go live.
+
+## Contact and policies
+
+- [Start a project](https://buildrweb.com/#contact): enquiry form, usually answered within one working day.
+- [Email BuildrWeb](mailto:hello@buildrweb.com): hello@buildrweb.com
+- [Privacy policy](https://buildrweb.com/privacy): how personal data is collected and used.
+
+## Optional
+
+- [Sitemap](https://buildrweb.com/sitemap.xml): list of all public pages.
