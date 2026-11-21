@@ -1,0 +1,15 @@
+# BuildrWeb
+
+> Remote-first studio building websites, AI voice agents and business automations for UK tradespeople and local service businesses (plumbers, electricians, roofers, builders, dentists, restaurants, estate agents).
+
+## Services
+- WordPress Websites
+- AI-Powered Website Development
+- AI Voice Agents (24/7 call answering, booking, lead qualification)
+- Business Automations (confirmations, reminders, lead routing, CRM updates)
+- Local SEO and Speed
+
+## Links
+- Home: https://buildrweb.com/
+- Privacy: https://buildrweb.com/privacy
+- Contact: hello@buildrweb.com
