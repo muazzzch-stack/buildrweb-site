@@ -1,50 +1,29 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowUp } from "lucide-react";
-import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { gsap, ScrollTrigger, prefersReducedMotion, scrollToPosition } from "@/lib/motion";
 
 const TERMINAL_LINES = ["BOOT / BUILDRWEB", "LOADING WEB + AI SYSTEMS", "CALIBRATING PERFORMANCE", "READY"];
 
-function announceReady() {
-  document.documentElement.dataset["siteReady"] = "true";
-  window.dispatchEvent(new Event("buildrweb:ready"));
-}
-
 export function Loader() {
-  const [progress, setProgress] = useState(0);
-  const [done, setDone] = useState(false);
-  const reduced = useReducedMotion();
-
-  useEffect(() => {
-    if (reduced) { setDone(true); announceReady(); return; }
-    let current = 0;
-    let assetsReady = document.readyState === "complete";
-    const markReady = () => { assetsReady = true; };
-    window.addEventListener("load", markReady, { once: true });
-    const cap = window.setTimeout(markReady, 1100);
-    const timer = window.setInterval(() => {
-      current = Math.min(assetsReady ? 100 : 92, current + Math.max(2, Math.round((100 - current) / 6)));
-      setProgress(current);
-      if (current >= 100) {
-        window.clearInterval(timer);
-        window.setTimeout(() => { setDone(true); announceReady(); }, 160);
-      }
-    }, 32);
-    return () => { window.clearInterval(timer); window.clearTimeout(cap); window.removeEventListener("load", markReady); };
-  }, [reduced]);
-
+  // The boot screen is pure CSS (see .boot in styles.css) so it runs from the very first paint, before any
+  // JavaScript has loaded. React only removes it from the DOM once the animation has finished.
   const [gone, setGone] = useState(false);
-  useEffect(() => { if (!done) return; const t = window.setTimeout(() => setGone(true), 720); return () => window.clearTimeout(t); }, [done]);
+  useEffect(() => {
+    document.documentElement.dataset["siteReady"] = "true";
+    window.dispatchEvent(new Event("buildrweb:ready"));
+    const timer = window.setTimeout(() => setGone(true), 1400);
+    return () => window.clearTimeout(timer);
+  }, []);
   if (gone) return null;
 
   return (
-    <div className={`fixed inset-0 z-[20000] flex items-center justify-center bg-background px-6 transition-[opacity,transform] duration-700 ease-[cubic-bezier(.22,1,.36,1)] ${done ? "pointer-events-none scale-[1.02] opacity-0" : "opacity-100"}`}>
+    <div aria-hidden className="boot pointer-events-none fixed inset-0 z-[20000] flex items-center justify-center bg-background px-6">
       <div className="w-full max-w-xl font-mono text-[11px] uppercase tracking-[0.12em]">
-        <div className="mb-8 flex justify-between text-faint"><span>BuildrWeb system</span><span>{String(progress).padStart(3, "0")}%</span></div>
+        <div className="mb-8 flex justify-between text-faint"><span>BuildrWeb system</span><span className="boot-pct" /></div>
         <div className="space-y-3">
-          {TERMINAL_LINES.map((line, index) => <p key={line} className={progress > index * 24 ? "text-foreground" : "text-faintest"}><span className="mr-3 text-primary">{progress > index * 24 ? ">" : "·"}</span>{line}</p>)}
+          {TERMINAL_LINES.map((line, index) => <p key={line} className="boot-line text-foreground" style={{ animationDelay: `${index * 0.12}s` }}><span className="mr-3 text-primary">&gt;</span>{line}</p>)}
         </div>
-        <div className="mt-8 h-px bg-border"><div className="h-px bg-primary transition-[width] duration-150" style={{ width: `${progress}%` }} /></div>
+        <div className="mt-8 h-px bg-border"><div className="boot-bar h-px origin-left bg-primary" /></div>
       </div>
     </div>
   );
@@ -83,7 +62,8 @@ export function SmoothScroll() {
       };
       document.addEventListener("click", onClick);
 
-      const refresh = () => ScrollTrigger.refresh();
+      let refreshTimer = 0;
+      const refresh = () => { window.clearTimeout(refreshTimer); refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 150); };
       window.addEventListener("load", refresh);
       window.addEventListener("buildrweb:ready", refresh);
       void document.fonts?.ready.then(refresh);

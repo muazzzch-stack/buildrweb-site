@@ -114,7 +114,7 @@ export function Showroom() {
                     <span className="h-2 w-2 rounded-full border border-faintest" /><span className="h-2 w-2 rounded-full border border-faintest" /><span className="h-2 w-2 rounded-full border border-faintest" />
                     <span className="ml-3 truncate font-mono text-[9px] tracking-[.08em] text-faint">{hostOf(system.href)}</span>
                   </div>
-                  <img src={imageFor(system.file)} alt={`${system.title} website preview`} width={1280} height={720} decoding="async" className="h-[calc(100%-2.25rem)] w-full object-cover object-left-top transition-transform duration-[1400ms] ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.03]" />
+                  <img src={imageFor(system.file)} alt={`${system.title} website preview`} width={1280} height={720} loading="lazy" decoding="async" className="h-[calc(100%-2.25rem)] w-full object-cover object-left-top transition-transform duration-[1400ms] ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.03]" />
                   <span className="absolute top-12 right-4 grid h-10 w-10 place-items-center bg-primary text-primary-foreground transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1"><ArrowUpRight size={17} /></span>
                   <span data-dim aria-hidden className="pointer-events-none absolute inset-0 bg-background opacity-0" />
                 </a>

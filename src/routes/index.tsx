@@ -13,6 +13,7 @@ import { Founder } from "@/components/site/Founder";
 import { Contact } from "@/components/site/Contact";
 import heroLg from "@/assets/hero-1920.webp";
 import heroSm from "@/assets/hero-960.webp";
+import heroXs from "@/assets/hero-640.webp";
 
 const TITLE = "BuildrWeb | Websites, AI Voice Agents & Automations for UK Businesses";
 const DESCRIPTION = "Fast websites, 24/7 AI voice agents and business automations for UK tradespeople and local service businesses. Answer calls, book appointments and follow up.";
@@ -36,7 +37,7 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "canonical", href: "https://buildrweb.com/" },
-      { rel: "preload", as: "image", fetchPriority: "high", href: heroLg, imageSrcSet: `${heroSm} 960w, ${heroLg} 1920w`, imageSizes: "100vw" },
+      { rel: "preload", as: "image", fetchPriority: "high", href: heroLg, imageSrcSet: `${heroXs} 640w, ${heroSm} 960w, ${heroLg} 1920w`, imageSizes: "100vw" },
     ],
   }),
   component: Index,

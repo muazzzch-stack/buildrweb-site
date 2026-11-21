@@ -38,17 +38,42 @@ export type FxContext = {
  * - Everything is reverted on unmount and when the viewport crosses the desktop breakpoint.
  * - Return a function from `setup` to run extra cleanup.
  */
-export function useScrollFx(ref: RefObject<HTMLElement | null>, setup: (context: FxContext) => void | (() => void)) {
+// Effects for sections below the fold are set up one at a time, in order, while the browser is idle.
+// This keeps hydration from producing one long main-thread task (better TBT) without changing the result.
+const queue: Array<() => void> = [];
+let draining = false;
+const whenIdle = (fn: () => void) => {
+  if (typeof window.requestIdleCallback === "function") window.requestIdleCallback(fn, { timeout: 900 });
+  else window.setTimeout(fn, 40);
+};
+function drain() {
+  const job = queue.shift();
+  if (job) job();
+  if (queue.length) whenIdle(drain);
+  else { draining = false; ScrollTrigger.refresh(); }
+}
+function enqueue(job: () => void) {
+  queue.push(job);
+  if (!draining) { draining = true; whenIdle(drain); }
+}
+
+export function useScrollFx(ref: RefObject<HTMLElement | null>, setup: (context: FxContext) => void | (() => void), options: { defer?: boolean } = {}) {
   useEffect(() => {
     const root = ref.current;
     if (!root || prefersReducedMotion()) return;
-    const mm = gsap.matchMedia(root);
-    mm.add({ desktop: "(min-width: 1024px)", mobile: "(max-width: 1023px)" }, (context) => {
-      const desktop = Boolean(context.conditions?.["desktop"]);
-      const q = gsap.utils.selector(root) as (selector: string) => HTMLElement[];
-      return setup({ root, q, desktop });
-    });
-    return () => mm.revert();
+    let mm: gsap.MatchMedia | null = null;
+    let cancelled = false;
+    const run = () => {
+      if (cancelled) return;
+      mm = gsap.matchMedia(root);
+      mm.add({ desktop: "(min-width: 1024px)", mobile: "(max-width: 1023px)" }, (context) => {
+        const desktop = Boolean(context.conditions?.["desktop"]);
+        const q = gsap.utils.selector(root) as (selector: string) => HTMLElement[];
+        return setup({ root, q, desktop });
+      });
+    };
+    if (options.defer === false) run(); else enqueue(run);
+    return () => { cancelled = true; mm?.revert(); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 }

@@ -46,7 +46,8 @@ export function SectionIntro({ index, label, title, copy, variant = "rise", comp
 
     gsap.from(rule, { scaleX: 0, transformOrigin: "left center", duration: 1.6, ease: EASE_OUT, scrollTrigger: { trigger: ref.current, start: "top 90%", once: true } });
     gsap.from(meta, { opacity: 0, y: 14, duration: 1.1, stagger: .08, ease: EASE_OUT, scrollTrigger: trigger });
-    gsap.from(q("[data-copy]"), { opacity: 0, y: 24, duration: 1.3, delay: .35, ease: EASE_OUT, scrollTrigger: trigger });
+    const copyEls = q("[data-copy]");
+    if (copyEls.length) gsap.from(copyEls, { opacity: 0, y: 24, duration: 1.3, delay: .35, ease: EASE_OUT, scrollTrigger: trigger });
 
     switch (variant) {
       case "blur":

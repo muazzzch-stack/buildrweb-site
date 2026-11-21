@@ -128,3 +128,21 @@ html, body { overflow-x: clip; }
 @keyframes menu-in { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: none; } }
 .menu-in { animation: menu-in .6s cubic-bezier(.22, 1, .36, 1) both; }
 @media (prefers-reduced-motion: reduce) { .marquee-track, .menu-in, .swap-in { animation: none; } }
+
+/* Boot screen and hero intro: pure CSS so they start at first paint, independent of JavaScript hydration. */
+@property --pct { syntax: "<integer>"; inherits: false; initial-value: 0; }
+@keyframes boot-pct { to { --pct: 100; } }
+@keyframes boot-bar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes boot-line { from { opacity: .28; } to { opacity: 1; } }
+@keyframes boot-out { to { opacity: 0; visibility: hidden; transform: scale(1.02); } }
+.boot { animation: boot-out .5s cubic-bezier(.22, 1, .36, 1) .7s forwards; }
+.boot-pct::after { counter-reset: pct var(--pct); content: counter(pct, decimal-leading-zero) "%"; animation: boot-pct .65s linear forwards; }
+.boot-bar { animation: boot-bar .65s cubic-bezier(.4, 0, .2, 1) forwards; }
+.boot-line { animation: boot-line .3s ease-out both; }
+@keyframes hero-zoom { from { transform: scale(1.12); } to { transform: none; } }
+@keyframes hero-rise { from { transform: translateY(118%); } to { transform: none; } }
+@keyframes hero-fade { from { transform: translateY(28px); } to { transform: none; } }
+.hero-zoom { animation: hero-zoom 1.6s cubic-bezier(.16, 1, .3, 1) .1s both; }
+.hero-rise { animation: hero-rise 1s cubic-bezier(.16, 1, .3, 1) both; }
+.hero-fade { animation: hero-fade .8s cubic-bezier(.16, 1, .3, 1) both; }
+@media (prefers-reduced-motion: reduce) { .boot { display: none; } .hero-zoom, .hero-rise, .hero-fade { animation: none; } }
